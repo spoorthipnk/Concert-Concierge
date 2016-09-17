@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">ConcertConcierge</string>
+    <string name="concert_title">Find a Concert Tonight!</string>
+    <string name="find_concerts">Find Concerts!</string>
+    <string name="logo">logo</string>
+    <string name="concert_name">Name of Artist</string>
+    <string name="concert_date">Date of show</string>
+    <string name="concert_venue">Venue Info</string>
+    <string name="concert_time">Time</string>
+    <string name="concert_city">City</string>
+    <string name="zip">Enter zip code</string>
+
+    <string name="openweather_api">1908e7a47dd061ed22e0faacfd678ba8</string>
+    <string name="openweather_url">http://api.openweathermap.org/data/2.5/weather?zip=60601,us</string>
+    <string name="songkick_api">KTHRla0QWSbiVtF0</string>
+    <string name="lastfm_api">01c216d809a51da0b30105d35eb76ac8</string>
+    <string name="googleclient_key">AIzaSyBB6V-AMvOsip5uQuy2mMBZ_ihzUtmqi94</string>
+    <string name="parkwhiz_key">8e9a96f6dd1e1d806752748f78c1c29b</string>
+    <string name="phone">Phone, if any</string>
+    <string name="age">Age Restrictions, if any</string>
+    <string name="uri">Link</string>
+    <string name="map">Map</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

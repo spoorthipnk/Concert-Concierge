@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content">
+
+<android.support.v7.widget.CardView
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/card_item"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_gravity="center"
+    android:layout_margin="5dp"
+    card_view:contentPadding="10dp"
+   android:verticalScrollbarPosition="left"
+    card_view:cardBackgroundColor="@color/cardview_shadow_end_color">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/data_relative"
+
+                >
+
+                <LinearLayout
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_alignParentLeft="true"
+                    android:id="@+id/data_layout">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FFFFFF"
+                        android:text="@string/concert_name"
+                        android:id="@+id/concert_artist"/>
+
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/concert_venue"
+                        android:text="@string/concert_venue"
+                        android:textColor="#FFFFFF"
+                        android:layout_height="wrap_content" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/concert_city"
+                        android:text="@string/concert_city"
+                        android:textColor="#FFFFFF"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FFFFFF"
+                        android:text="@string/concert_time"
+                       android:layout_alignParentRight="true"
+                        android:paddingRight="10dp"
+                        android:id="@+id/concert_time"
+                        android:layout_gravity="right" />
+
+
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="108dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/black"
+                    android:id="@+id/concert_image"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/data_layout"/>
+
+
+
+            </RelativeLayout>
+
+
+
+</android.support.v7.widget.CardView>
+
+
+
+
+</RelativeLayout>
+
+
