@@ -3,7 +3,6 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-
     android:layout_height="wrap_content">
 
 <android.support.v7.widget.CardView
@@ -46,14 +45,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:id="@+id/concert_venue"
-                        android:text="@string/concert_venue"
-                        android:textColor="#FFFFFF"
-                        android:layout_height="wrap_content" />
-                    </RelativeLayout>
+                        ></RelativeLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -69,8 +61,31 @@
                         android:text="@string/concert_time"
                        android:layout_alignParentRight="true"
                         android:paddingRight="10dp"
-                        android:id="@+id/concert_time"
-                        android:layout_gravity="right" />
+                        android:id="@+id/concert_time" />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="ltr">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Distance"
+                        android:id="@+id/txt_distance"
+
+                        android:textColor="#FFFFFF"
+                        android:layout_gravity="right"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/location_icon" />
+
+                    <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:id="@+id/location_icon"
+                    android:src="@drawable/location"
+                     />
+
+                    </RelativeLayout>
 
 
                 </LinearLayout>
@@ -81,7 +96,6 @@
                     android:id="@+id/concert_image"
                     android:layout_alignParentRight="true"
                     android:layout_toRightOf="@+id/data_layout"/>
-
 
 
             </RelativeLayout>

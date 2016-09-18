@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.andreakim.concertconcierge.DetailScrollingActivity"
+    tools:showIn="@layout/activity_detail_scrolling">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/event_detail_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:background="@drawable/event_back"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+
+        tools:context="com.andreakim.concertconcierge.ConcertDetailActivity">
+
+        <TextView
+            android:id="@+id/concert_txtview_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:textColor="#FFFFFF"
+            android:text="@string/concert_name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_alignStart="@+id/concert_txtview_date" />
+
+
+
+        <TextView
+            android:id="@+id/concert_txtview_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:padding="6dp"
+            android:text="@string/concert_date"
+            android:textStyle="bold"
+            android:layout_below="@+id/concert_txtview_name"
+            android:layout_alignStart="@+id/concert_txtcity" />
+        <TextView
+            android:id="@+id/concert_txtview_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:padding="6dp"
+            android:text="@string/concert_time"
+            android:textStyle="bold"
+            android:layout_below="@+id/concert_txtview_name"
+            android:layout_centerHorizontal="true" />
+
+
+        <TextView
+            android:id="@+id/concert_txtcity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:text="City"
+            android:padding="6dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/concert_txtview_time"
+            android:layout_alignStart="@+id/concert_txtview_venue" />
+
+        <TextView
+            android:id="@+id/concert_txtview_venue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:padding="6dp"
+            android:text="@string/concert_venue"
+            android:textStyle="bold"
+            android:layout_below="@+id/concert_txtcity"
+            android:layout_alignStart="@+id/concert_txtUri" />
+
+        <TextView
+            android:id="@+id/concert_txtUri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:padding="6dp"
+            android:text="URi"
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/concert_txtAge"
+            android:layout_alignStart="@+id/weather_temp" />
+        <TextView
+            android:id="@+id/concert_txtAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_below="@+id/concert_txtview_venue"
+            android:layout_marginStart="32dp"
+            android:layout_toRightOf="@+id/concert_txtUri"
+            android:padding="6dp"
+            android:text="@string/age"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:id="@+id/weather_temp"
+            android:padding="6dp"
+            android:textStyle="bold"
+            android:text="Weather temp"
+            android:layout_below="@+id/concert_txtUri"
+            android:layout_alignStart="@+id/weather_desc" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/weather_desc"
+            android:textColor="#FFFFFF"
+            android:padding="6dp"
+            android:textStyle="bold"
+            android:text="Weather desc"
+            android:layout_below="@+id/weather_temp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_phone"
+            android:textColor="#FFFFFF"
+            android:padding="6dp"
+            android:textStyle="bold"
+            android:text="Phone"
+            android:layout_below="@+id/weather_desc"
+            android:layout_alignStart="@+id/weather_desc" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_popularity"
+            android:textColor="#FFFFFF"
+            android:padding="6dp"
+            android:textStyle="bold"
+            android:text="Popularity"
+            android:layout_below="@+id/txt_phone"
+            android:layout_alignStart="@+id/weather_desc" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_age"
+            android:textColor="#FFFFFF"
+            android:padding="6dp"
+            android:textStyle="bold"
+            android:text="Age Restriction"
+
+            android:layout_below="@+id/txt_phone"
+            android:layout_toEndOf="@+id/concert_txtview_time" />
+
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Parking"
+            android:id="@+id/btn_parking"
+            android:layout_below="@+id/txt_age"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="84dp" />
+
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

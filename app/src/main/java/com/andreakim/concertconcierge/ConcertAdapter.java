@@ -41,7 +41,8 @@ public class ConcertAdapter extends RecyclerView.Adapter<ConcertAdapter.ViewHold
 
         holder.tv_name_artist.setText(concerts.get(position).getName());
         holder.tv_time.setText(concerts.get(position).getTime());
-        holder.tv_venue.setText(concerts.get(position).getVenue());
+      //  holder.tv_venue.setText(concerts.get(position).getVenue());
+        holder.tv_dist.setText(String.valueOf(concerts.get(position).getDist())+"mi");
         holder.tv_city.setText(concerts.get(position).getCity());
 
 
@@ -72,7 +73,7 @@ public class ConcertAdapter extends RecyclerView.Adapter<ConcertAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView tv_name_artist, tv_time, tv_venue,tv_city;
+        private TextView tv_name_artist, tv_time, tv_venue,tv_city,tv_dist;
         private ImageView tv_image;
         private CardView cardView;
 
@@ -86,7 +87,8 @@ public class ConcertAdapter extends RecyclerView.Adapter<ConcertAdapter.ViewHold
 
             tv_name_artist = (TextView)view.findViewById(R.id.concert_artist);
             tv_time = (TextView)view.findViewById(R.id.concert_time);
-            tv_venue = (TextView)view.findViewById(R.id.concert_venue);
+          //  tv_venue = (TextView)view.findViewById(R.id.concert_venue);
+            tv_dist = (TextView)view.findViewById(R.id.txt_distance);
             tv_city=(TextView)view.findViewById(R.id.concert_city);
             tv_image = (ImageView)view.findViewById(R.id.concert_image);
             cardView = (CardView)view.findViewById(R.id.card_item);

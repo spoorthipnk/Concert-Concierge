@@ -12,6 +12,15 @@ public class Concert {
     String date;
     String time;
     String image_url;
+    double dist;
+
+    public double getDist() {
+        return dist;
+    }
+
+    public void setDist(Float dist) {
+        this.dist = dist;
+    }
 
     public Context getContext() {
         return context;
@@ -65,7 +74,7 @@ public class Concert {
 
     String city;
 
-    public Concert(String name, String venue, String city, String time,String image_url ,int id,Context context) {
+    public Concert(String name, String venue, String city, String time,String image_url ,int id,Context context, double dist) {
 
 
         this.name = name;
@@ -75,6 +84,7 @@ public class Concert {
         this.image_url = image_url;
         this.context=context;
         this.id = id;
+        this.dist=dist;
     }
 
 

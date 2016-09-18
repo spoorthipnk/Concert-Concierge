@@ -2,7 +2,14 @@ package com.andreakim.concertconcierge;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.net.ParseException;
@@ -15,11 +22,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.util.AsyncListUtil;
 import android.support.v7.widget.CardView;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -42,10 +52,17 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 import java.io.FileDescriptor;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static android.text.format.DateFormat.getDateFormat;
 
@@ -58,6 +75,8 @@ public class ConcertDetailActivity extends AppCompatActivity implements OnMapRea
     private CardView mapCard;
     private String parking_url;
     private Button btn_parking;
+    String image_url;
+    ImageView background;
 
     String city, lat, lng, popularity, uri, event_name, id, time, date, ageRestriction, zip, venue_name, street, phone, venue_description;
     private TextView txt_name, txt_city, txt_popularity, txt_uri, txt_time, txt_date, txt_ageRestriction, txt_venue, txt_phone, currentTemp, mDescription;
@@ -66,6 +85,10 @@ public class ConcertDetailActivity extends AppCompatActivity implements OnMapRea
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_concert_detail);
+
+        image_url = getIntent().getStringExtra("image_url");
+        new BackgroundImgAsync().execute();
+
 
         currentTemp = (TextView) findViewById(R.id.weather_temp);
         mDescription = (TextView) findViewById(R.id.weather_desc);
@@ -82,6 +105,7 @@ public class ConcertDetailActivity extends AppCompatActivity implements OnMapRea
         txt_venue = (TextView) findViewById(R.id.concert_txtview_venue);
         mapFragment = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
         btn_parking = (Button)findViewById(R.id.btn_parking);
+       // background = (ImageView)findViewById(R.id.background) ;
 
 
         new EventAsync().execute();
@@ -98,7 +122,48 @@ public class ConcertDetailActivity extends AppCompatActivity implements OnMapRea
 
 
 
+    private class BackgroundImgAsync extends AsyncTask<Void,Void,Void>{
+       Bitmap background_img;
 
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            OkHttpClient client = new OkHttpClient();
+
+            try {
+                Request request = new Request.Builder()
+                        .url(image_url)
+                        .build();
+
+                Response response = client.newCall(request).execute();
+
+                byte[] image = response.body().bytes();
+                 background_img = BitmapFactory.decodeByteArray(image,0,image.length);
+
+
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            RelativeLayout rl = (RelativeLayout)findViewById(R.id.event_detail_layout);
+            Drawable d = new BitmapDrawable(background_img);
+            rl.setBackground(d);
+            Random random=new Random();
+            ColorFilter cf = new PorterDuffColorFilter(Color.rgb(0, random.nextInt(42),random.nextInt(79)), PorterDuff.Mode.MULTIPLY  );
+           // rl.setAlpha((float) 0.6);
+            rl.getBackground().setColorFilter(cf);
+
+           // background.setImageBitmap(background_img);
+         //   background.setColorFilter(cf);
+        }
+    }
 
     private class WeatherTask extends AsyncTask<Void, Void, Void> {
         @TargetApi(Build.VERSION_CODES.N)
@@ -223,7 +288,7 @@ public class ConcertDetailActivity extends AppCompatActivity implements OnMapRea
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(parking_url));
+            intent.setData(Uri.parse("https://www.parkwhiz.com/p/chicago-parking/180-n-franklin-st"));
             startActivity(intent);
 
         }

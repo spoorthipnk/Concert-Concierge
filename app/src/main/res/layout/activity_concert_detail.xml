@@ -3,24 +3,18 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/event_detail_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/event_back"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:background="@drawable/event_back"
+
             tools:context="com.andreakim.concertconcierge.ConcertDetailActivity">
 
-            <ImageView
-                android:id="@+id/concert_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="18dp"
-                android:textColor="#FFFFFF"
-                android:src="@drawable/concerttwo" />
-            <TextView
+    <TextView
                 android:id="@+id/concert_txtview_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,7 +23,6 @@
                 android:text="@string/concert_name"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:layout_below="@+id/concert_image"
                 android:layout_alignStart="@+id/concert_txtview_date" />
 
 
@@ -119,8 +112,7 @@
                 android:padding="6dp"
                 android:textStyle="bold"
                 android:text="Weather desc"
-                android:layout_below="@+id/weather_temp"
-                android:layout_toStartOf="@+id/concert_image" />
+                android:layout_below="@+id/weather_temp" />
                  <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -162,10 +154,16 @@
                 android:layout_height="wrap_content"
                 android:text="View Parking"
                 android:id="@+id/btn_parking"
-                android:layout_alignParentBottom="true"
-                android:layout_alignEnd="@+id/concert_image"
-                android:layout_marginBottom="57dp" />
-        </RelativeLayout>
+                android:layout_alignBottom="@+id/concert_txtAge"
+                android:layout_centerHorizontal="true" />
+
+    ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/background"
+        android:layout_below="@+id/btn_parking"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>
 
 
 

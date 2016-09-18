@@ -4,14 +4,14 @@ import android.annotation.TargetApi;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
-import android.support.annotation.*;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
-import android.*;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -39,14 +39,13 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.model.LatLng;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,13 +55,15 @@ import java.util.List;
 import java.util.Locale;
 
 
+
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, RecyclerViewClickListener, GoogleApiClient.ConnectionCallbacks {
     private LocationRequest mLocationRequest;
     private RecyclerView recyclerView;
     private ConcertAdapter concertAdapter;
     static private ArrayList<Concert> list_concerts;
     String place;
-    String name, date, venue, time, artist, venue_lat, venue_lng, city,image_url;
+    Location curr_loc;
+    String name, date, venue, time, artist, venue_lat, venue_lng, city,image_url="http://media.nj.com/route_45/photo/uniontransfer4jpg-263b57b6d886dc58.jpg";
     int event_id = 0;
     private GoogleApiClient mGoogleApiClient;
     private ProgressBar progressBar;
@@ -144,6 +145,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 launchDataAsyc(lat, lng);
             }
 
+            curr_loc = new Location("start");
+            curr_loc.setLatitude(location.getLatitude());
+            curr_loc.setLongitude(location.getLongitude());
+
+
+
 
         }
         catch (SecurityException e){
@@ -152,6 +159,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+                .setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES)
+                .build();
+
+        autocompleteFragment.setFilter(typeFilter);
+
 
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
 
@@ -329,27 +343,39 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                                 city = innerObject.getJSONObject("location").getString("city");
                                 event_id = innerObject.getInt("id");
                                 context = getApplicationContext();
+                                Location destination = new Location("end");
+                                destination.setLatitude(Double.valueOf(venue_lat));
+                                destination.setLongitude(Double.valueOf(venue_lng));
+                                Float dist = curr_loc.distanceTo(destination);
+                                double dist_miles = dist*0.000621371;
+                                 double miles = Math.round(dist_miles*10.0)/10.0;
+
+
 
                                 JSONArray jsonArray_forArtist = innerObject.getJSONArray("performance");
                                 JSONObject innerObject_artist = jsonArray_forArtist.getJSONObject(0);
                                 artist = innerObject_artist.getJSONObject("artist").getString("displayName");
 
                                 Bitmap bitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.concerttwo);
-                                JSONObject images_JsonObject = JsonParser.getImage(artist);
-                                if (images_JsonObject != null) {
-                                    JSONArray items_JsonArray = images_JsonObject.getJSONObject("artists").getJSONArray("items");
-                                    if (items_JsonArray != null) {
-                                        JSONObject image_inner_object = items_JsonArray.getJSONObject(0);
-                                        JSONArray image_array = image_inner_object.getJSONArray("images");
-                                        JSONObject image_obj = image_array.getJSONObject(1);
-                                         image_url = image_obj.getString("url");
+                                try {
+                                    JSONObject images_JsonObject = JsonParser.getImage(artist);
+                                    if (images_JsonObject != null) {
+                                        JSONArray items_JsonArray = images_JsonObject.getJSONObject("artists").getJSONArray("items");
+                                        if (items_JsonArray != null) {
+                                            JSONObject image_inner_object = items_JsonArray.getJSONObject(0);
+                                            JSONArray image_array = image_inner_object.getJSONArray("images");
+                                            JSONObject image_obj = image_array.getJSONObject(1);
+                                            image_url = image_obj.getString("url");
 
+                                        }
                                     }
+                                }catch (Exception e){
+                                    image_url = "http://media.nj.com/route_45/photo/uniontransfer4jpg-263b57b6d886dc58.jpg";
                                 }
 
 
 
-                                Concert concert = new Concert(name, venue, city, time, image_url, event_id, context);
+                                Concert concert = new Concert(name, venue, city, time, image_url, event_id, context, miles);
                                 list_concerts.add(concert);
                             }
                         }
@@ -378,7 +404,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     list_concerts.get(position);
                     Intent intent = new Intent(MainActivity.this,ConcertDetailActivity.class);
                     int eventid = list_concerts.get(position).getId();
+                    String imageURL = list_concerts.get(position).getImage_url();
                     intent.putExtra("event_id",eventid);
+                    intent.putExtra("image_url",imageURL);
                     startActivity(intent);
                 }
             });

@@ -14,7 +14,7 @@
     <string name="openweather_url">http://api.openweathermap.org/data/2.5/weather?zip=60601,us</string>
     <string name="songkick_api">KTHRla0QWSbiVtF0</string>
     <string name="lastfm_api">01c216d809a51da0b30105d35eb76ac8</string>
-    <string name="googleclient_key">AIzaSyBB6V-AMvOsip5uQuy2mMBZ_ihzUtmqi94</string>
+    <string name="googleclient_key">AIzaSyCO71JyY1i7d4y6q0Ww9o2ggdq7JiNs7Jc</string>
     <string name="parkwhiz_key">8e9a96f6dd1e1d806752748f78c1c29b</string>
     <string name="phone">Phone, if any</string>
     <string name="age">Age Restrictions, if any</string>
@@ -23,4 +23,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_detail_scrolling">DetailScrollingActivity</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
